@@ -1,5 +1,5 @@
-from category import Prompt
 from config import settings
+from prompt import Prompt
 
 
 def main():
@@ -7,7 +7,7 @@ def main():
 
     prompt = Prompt(
         "./prompt_templates",
-        "intent.j2",
+        "classifier.j2",
         dict(
             category="Industry",
             categories=[
