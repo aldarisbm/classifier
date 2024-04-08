@@ -1,0 +1,14 @@
+{# prompt_templates/intent.j2 #}
+[INST] <<SYS>>You're a {{ class }} classifier. Based on the following categories, given a query, you will decide which {{ class }} fits it best.
+These are the categories:
+
+{%- for cat in categories %}
+{{- cat }}
+{%- endfor %}
+<</SYS>>
+{%- for shot in few_shots %}
+{{ shot.prompt }}[/INST]
+{{ shot.response }}
+</s><s>[INST]
+{%- endfor %}
+{{ query }}[/INST]
