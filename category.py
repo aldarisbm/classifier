@@ -1,23 +1,22 @@
 from dataclasses import dataclass
-from typing import List
+from typing import Optional
 
 from jinja2 import Template, Environment, FileSystemLoader
-from pydantic import BaseModel
 
 
 @dataclass
 class Prompt:
-    template_path: str
-    template_args: dict
+    _template_path: str
+    _template_name: str
+    _template_args: dict
+    _tpl: Optional[Template] = None
 
-    def load_template(template: str) -> Template:
-        environment: Environment = Environment(loader=FileSystemLoader("prompt_templates/"))
-        ptpl: Template = environment.get_template(f"{template}.j2")
-        return ptpl
+    def __post_init__(self):
+        self._load_template()
 
+    def _load_template(self) -> None:
+        environment: Environment = Environment(loader=FileSystemLoader(f"{self._template_path}/"))
+        self._tpl = environment.get_template(f"{self._template_name}")
 
-@dataclass
-class Category(BaseModel):
-    name: str
-    categories: List[str]
-    prompt: Prompt
+    def get_prompt(self) -> str:
+        return self._tpl.render(**self._template_args)
