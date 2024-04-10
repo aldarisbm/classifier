@@ -5,7 +5,7 @@ from jinja2 import Template, Environment, FileSystemLoader
 
 
 @dataclass
-class Prompt:
+class PromptTemplate:
     _template_path: str
     _template_name: str
     _template_args: dict
@@ -18,5 +18,6 @@ class Prompt:
         environment: Environment = Environment(loader=FileSystemLoader(f"{self._template_path}/"))
         self._tpl = environment.get_template(f"{self._template_name}")
 
-    def get_prompt(self) -> str:
+    def get_prompt(self, query: str) -> str:
+        self._template_args['query'] = query
         return self._tpl.render(**self._template_args)
