@@ -28,4 +28,8 @@ class ClassifierLlm:
 
     def inference(self, query: str) -> str:
         rendered_prompt = self.prompt.get_prompt(query)
-        return self._llama(rendered_prompt)['choices'][0]['text']
+        return self._llama(
+            rendered_prompt,
+            grammar=self._grammar,
+            temperature=0
+        )['choices'][0]['text']
