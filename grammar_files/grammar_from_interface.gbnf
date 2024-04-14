@@ -1,6 +1,6 @@
 root ::= Category
-Categories ::= "\"Healthcare\"" | "\"Technology\"" | "\"Agriculture\""
-Category ::= "{"   ws   "\"cat\":"   ws   Categories   "}"
+Categories ::= "\"Technology\"" | "\"Healthcare\"" | "\"Finance\"" | "\"Manufacturing\"" | "\"Retail\"" | "\"Education\"" | "\"Energy\"" | "\"Agriculture\"" | "\"Other\""
+Category ::= "{"   ws   "\"category\":"   ws   Categories   "}"
 Categorylist ::= "[]" | "["   ws   Category   (","   ws   Category)*   "]"
 string ::= "\""   ([^"]*)   "\""
 boolean ::= "true" | "false"

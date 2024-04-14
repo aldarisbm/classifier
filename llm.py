@@ -21,7 +21,7 @@ class ClassifierLlm:
             use_mlock=True,
             n_ctx=4096,
             n_batch=256,
-            verbose=True,
+            verbose=False
         )
         self._grammar = LlamaGrammar.from_file(grammar_path)
         self.prompt = prompt
