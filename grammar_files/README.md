@@ -1,3 +1,7 @@
-Example category gnbf from `./interface.ts` to create your own go to [HERE](https://grammar.intrinsiclabs.ai)
+We are using a `ts` interface to constraint the LLM output.
 
-Your few shot should reflect these enums
+To create your own go to [HERE](https://grammar.intrinsiclabs.ai)
+
+Example category gnbf from file at `./interface.ts`
+
+Your few shot should reflect the design of the enums.
