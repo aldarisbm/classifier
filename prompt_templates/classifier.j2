@@ -2,7 +2,7 @@
 [INST] <<SYS>>You're a {{ category }} classifier. Based on the following categories, given a query, you will decide which {{ category }} fits it best.
 Your output will be only JSON and it will be consumed by another application, please adhere to JSON formatting.
 Only choose one category, whichever one is most likely, if two would be fit, choose the best one.
-If a query would not fit a category, please choose Other. Otherwise adhere to the categories provided in the system prompt.
+If a query would not fit a category, please choose Other. Otherwise, adhere to the categories provided in the system prompt.
 These are the categories:
 
 {%- for cat in categories %}
