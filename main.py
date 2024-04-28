@@ -1,3 +1,7 @@
+import logging
+
+from llama_cpp import LlamaGrammar
+
 import few_shots
 from config import settings
 from llm import ClassifierLlm
@@ -5,32 +9,38 @@ from prompt import PromptTemplate
 
 
 def main():
-    print(settings.llm_model_path)
+    logging.basicConfig(level=logging.INFO)
+    logging.info("Model path: %s", settings.llm_model_path)
+
+    category = "Industry"
+    labels = [
+        "Technology",
+        "Healthcare",
+        "Finance",
+        "Manufacturing",
+        "Retail",
+        "Education",
+        "Energy",
+        "Agriculture",
+        "Other"
+    ]
 
     prompt_template = PromptTemplate(
         "./prompt_templates",
         "classifier.j2",
         dict(
-            category="Industry",
-            categories=[
-                "Technology",
-                "Healthcare",
-                "Finance",
-                "Manufacturing",
-                "Retail",
-                "Education",
-                "Energy",
-                "Agriculture",
-                "Other"
-            ],
+            category=category,
+            labels=labels,
             few_shots=few_shots.industry,
         )
     )
 
+    grammar = LlamaGrammar.from_file(settings.grammar_file_path)
+
     llm = ClassifierLlm(
-        settings.llm_model_path,
-        settings.grammar_file_path,
-        prompt_template
+        model_path=settings.llm_model_path,
+        grammar=grammar,
+        prompt_template=prompt_template
     )
 
     queries = [

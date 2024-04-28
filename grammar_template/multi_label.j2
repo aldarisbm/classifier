@@ -1,6 +1,7 @@
+{# grammar_template/multi_label.j2 #}
 root ::= Label
 Labels ::= "\"Technology\"" | "\"Healthcare\"" | "\"Finance\"" | "\"Manufacturing\"" | "\"Retail\"" | "\"Education\"" | "\"Energy\"" | "\"Agriculture\"" | "\"Other\""
-Label ::= "{"   ws   "\"label\":"   ws   Labels   "}"
+Label ::= "{"   ws   "\"labels\":"   ws   Labelslist   "}"
 Labellist ::= "[]" | "["   ws   Label   (","   ws   Label)*   "]"
 string ::= "\""   ([^"]*)   "\""
 boolean ::= "true" | "false"

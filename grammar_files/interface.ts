@@ -1,8 +1,8 @@
-interface Category {
-    category: Categories
+interface Label {
+    label: Labels
 }
 
-enum Categories {
+enum Labels {
     Technology = "Technology",
     Healthcare = "Healthcare",
     Finance = "Finance",
