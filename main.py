@@ -1,9 +1,7 @@
 import logging
 
-from jinja2 import Environment, FileSystemLoader
-from llama_cpp import LlamaGrammar
-
 import few_shots
+import utils
 from config import settings
 from llm import ClassifierLlm
 from prompt import PromptTemplate
@@ -36,17 +34,7 @@ def main():
         )
     )
 
-    # get template for single labels
-    environment: Environment = Environment(loader=FileSystemLoader("grammar_templates/"))
-    template = environment.get_template("single_label.j2")
-    grammar = LlamaGrammar.from_string(
-        template.render(
-            labels=labels
-        )
-    )
-
-    # grammer from file
-    # grammar = LlamaGrammar.from_file("./grammar_files/grammar_from_interface.gbnf")
+    grammar = utils.get_grammar_from_template(template="single_label.j2", labels=labels)
 
     llm = ClassifierLlm(
         model_path=settings.llm_model_path,
