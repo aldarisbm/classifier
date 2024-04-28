@@ -13,7 +13,7 @@ These are the labels:
 <</SYS>>
 {%- for shot in few_shots %}
 {{ shot.prompt }}[/INST]
-{{ shot.response }}
+{"label": "{{ shot.response }}"}
 </s><s>[INST]
 {%- endfor %}
 {{ query }}[/INST]
