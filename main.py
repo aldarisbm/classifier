@@ -1,5 +1,6 @@
 import logging
 
+from jinja2 import Environment, FileSystemLoader
 from llama_cpp import LlamaGrammar
 
 import few_shots
@@ -35,7 +36,17 @@ def main():
         )
     )
 
-    grammar = LlamaGrammar.from_file(settings.grammar_file_path)
+    # get template for single labels
+    environment: Environment = Environment(loader=FileSystemLoader("grammar_templates/"))
+    template = environment.get_template("single_label.j2")
+    grammar = LlamaGrammar.from_string(
+        template.render(
+            labels=labels
+        )
+    )
+
+    # grammer from file
+    # grammar = LlamaGrammar.from_file("./grammar_files/grammar_from_interface.gbnf")
 
     llm = ClassifierLlm(
         model_path=settings.llm_model_path,

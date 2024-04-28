@@ -1,6 +1,14 @@
 {# grammar_template/single_label.j2 #}
+{% set formatted_labels = [] %}
+{% for label in labels %}
+    {% set formatted_label = "\"\\\"" + label + "\\\"\"" %}
+    {% if not loop.last %}
+        {% set formatted_label = formatted_label + " |" %}
+    {% endif %}
+    {% set _ = formatted_labels.append(formatted_label) %}
+{% endfor %}
 root ::= Label
-Labels ::= "\"Technology\"" | "\"Healthcare\"" | "\"Finance\"" | "\"Manufacturing\"" | "\"Retail\"" | "\"Education\"" | "\"Energy\"" | "\"Agriculture\"" | "\"Other\""
+Labels ::= {{ formatted_labels|join(" ") }}
 Label ::= "{"   ws   "\"label\":"   ws   Labels   "}"
 Labellist ::= "[]" | "["   ws   Label   (","   ws   Label)*   "]"
 string ::= "\""   ([^"]*)   "\""
