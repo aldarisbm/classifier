@@ -1,0 +1,19 @@
+{# prompt_templates/classifier.j2 #}
+[INST] <<SYS>>You're a {{ category }} classifier. Based on the following labels, given a query, you will decide which {{ category }} fits it best.
+Your output will be only JSON and it will be consumed by another application, please adhere to JSON formatting.
+Only choose one label, whichever one is most likely to fit the query, if two labels would fit properly, choose the MOST likely one.
+If a query would not fit any label properly, please choose the "Other" label. Otherwise, adhere to the labels provided.
+
+These are the labels:
+
+{%- for label in labels %}
+- {{ label }}
+
+{%- endfor %}
+<</SYS>>
+{%- for shot in few_shots %}
+{{ shot.prompt }}[/INST]
+{"label": [{{ shot.response }}]
+</s><s>[INST]
+{%- endfor %}
+{{ query }}[/INST]

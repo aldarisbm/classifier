@@ -1,10 +1,9 @@
 import logging
 
 import few_shots
-import utils
 from config import settings
+from constants import SINGLE
 from llm import ClassifierLlm
-from prompt import PromptTemplate
 
 
 def main():
@@ -24,22 +23,12 @@ def main():
         "Other"
     ]
 
-    prompt_template = PromptTemplate(
-        "./prompt_templates",
-        "classifier.j2",
-        dict(
-            category=category,
-            labels=labels,
-            few_shots=few_shots.industry,
-        )
-    )
-
-    grammar = utils.get_grammar_from_template(template="single_label.j2", labels=labels)
-
     llm = ClassifierLlm(
         model_path=settings.llm_model_path,
-        grammar=grammar,
-        prompt_template=prompt_template
+        category=category,
+        labels=labels,
+        few_shots=few_shots.industry_single,
+        classify_type=SINGLE
     )
 
     queries = [

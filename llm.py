@@ -1,8 +1,9 @@
 import logging
-from typing import Optional
+from typing import Optional, List, Dict
 
 from llama_cpp import Llama, LlamaGrammar
 
+import utils
 from prompt import PromptTemplate
 
 
@@ -14,7 +15,22 @@ class ClassifierLlm:
     _llama: Llama
     _grammar: Optional[LlamaGrammar] = None
 
-    def __init__(self, model_path: str, grammar: LlamaGrammar, prompt_template: PromptTemplate):
+    def __init__(self, category: str, labels: List[str], few_shots: List[Dict], classify_type: str, model_path: str):
+        self._prompt_template = PromptTemplate(
+            "./prompt_templates",
+            f"{classify_type}_classifier.j2",
+            dict(
+                category=category,
+                labels=labels,
+                few_shots=few_shots,
+            )
+        )
+
+        grammar = utils.get_grammar_from_template(
+            template=f"{classify_type}_label.j2",
+            labels=labels
+        )
+
         self._llama = Llama(
             model_path=model_path,
             n_gpu_layers=-1,
@@ -25,7 +41,6 @@ class ClassifierLlm:
             verbose=False
         )
         self._grammar = grammar
-        self._prompt_template = prompt_template
 
     def inference(self, query: str) -> str:
         rendered_prompt = self._prompt_template.get_prompt(query)

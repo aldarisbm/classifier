@@ -1,0 +1,2 @@
+SINGLE = "single"
+MULTI = "multi"
