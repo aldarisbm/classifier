@@ -1,8 +1,9 @@
 import logging
 
-import few_shots
+from category import Industry
 from config import settings
 from constants import SINGLE
+from few_shots import industry_single
 from llm import ClassifierLlm
 
 
@@ -23,12 +24,16 @@ def main():
         "Other"
     ]
 
-    llm = ClassifierLlm(
-        model_path=settings.llm_model_path,
+    industry = Industry(
         category=category,
         labels=labels,
-        few_shots=few_shots.industry_single,
-        classify_type=SINGLE
+        classify_type=SINGLE,
+        few_shots=industry_single.few_shot
+    )
+
+    llm = ClassifierLlm(
+        model_path=settings.llm_model_path,
+        category=industry
     )
 
     queries = [

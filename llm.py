@@ -1,9 +1,10 @@
 import logging
-from typing import Optional, List, Dict
+from typing import Optional
 
 from llama_cpp import Llama, LlamaGrammar
 
 import utils
+from category import Category
 from prompt import PromptTemplate
 
 
@@ -15,20 +16,20 @@ class ClassifierLlm:
     _llama: Llama
     _grammar: Optional[LlamaGrammar] = None
 
-    def __init__(self, category: str, labels: List[str], few_shots: List[Dict], classify_type: str, model_path: str):
+    def __init__(self, model_path: str, category: Category):
         self._prompt_template = PromptTemplate(
             "./prompt_templates",
-            f"{classify_type}_classifier.j2",
+            f"{category.classify_type}_classifier.j2",
             dict(
                 category=category,
-                labels=labels,
-                few_shots=few_shots,
+                labels=category.labels,
+                few_shots=category.few_shots,
             )
         )
 
         grammar = utils.get_grammar_from_template(
-            template=f"{classify_type}_label.j2",
-            labels=labels
+            template=f"{category.classify_type}_label.j2",
+            labels=category.labels
         )
 
         self._llama = Llama(

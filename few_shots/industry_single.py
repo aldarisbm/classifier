@@ -1,4 +1,4 @@
-industry_single = [
+few_shot = [
     dict(
         prompt="What are the latest trends on silicone chip technology?",
         response="Technology"
