@@ -4,39 +4,35 @@ few_shot = [
         response=["Agriculture", "Technology"]
     ),
     dict(
-        prompt="What kind of new software development tools are there? Are there any interesting trends in AI?",
-        response="Technology"
+        prompt="What are the recent advancements in cancer immunotherapy?",
+        response=["Healthcare"]
     ),
     dict(
-        prompt="What are some recent advancements in gene editing? Are there any new drugs in development for cancer treatment?",
-        response="Healthcare"
+        prompt="How are changes in consumer behavior impacting the fashion retail sector?",
+        response=["Retail"]
     ),
     dict(
-        prompt="What are the new regulations for cryptocurrency? How is the stock market performing?",
-        response="Finance"
+        prompt="What are the emerging trends in artificial intelligence, and how are they impacting healthcare and finance sectors?",
+        response=["Healthcare", "Finance", "Technology"]
     ),
     dict(
-        prompt="What are the challenges of automating car assembly lines? How can manufacturers improve supply chain efficiency?",
-        response="Manufacturing"
+        prompt="How are nanotechnology and biotechnology intersecting to create new possibilities in medicine and agriculture?",
+        response=["Healthcare", "Agriculture", "Technology"]
     ),
     dict(
-        prompt="What are some effective omnichannel marketing strategies? How can e-commerce businesses improve customer experience?",
-        response="Retail"
+        prompt="What are the recent developments in renewable energy sources like solar and wind power, and how are they reshaping the energy sector?",
+        response=["Energy", "Technology"]
     ),
     dict(
-        prompt="What are some new developments in educational technology? How can we improve online learning platforms?",
-        response="Education"
+        prompt="How are advancements in data analytics and machine learning being leveraged in retail and e-commerce for personalized customer experiences and improved supply chain management?",
+        response=["Retail", "Technology"]
     ),
     dict(
-        prompt="What are the benefits of solar energy? How can we achieve energy independence?",
-        response="Energy"
+        prompt="What are the implications of quantum computing for cybersecurity and financial markets, and how can businesses prepare for the quantum revolution?",
+        response=["Finance", "Technology"]
     ),
     dict(
-        prompt="How can we improve public transportation systems? What are some new initiatives in urban planning?",
-        response="Government & Public Administration"
-    ),
-    dict(
-        prompt="What are some new technologies used in precision agriculture? How can we improve farm efficiency?",
-        response="Agriculture"
+        prompt="How is the Internet of Things (IoT) transforming manufacturing processes, logistics, and energy consumption?",
+        response=["Manufacturing", "Energy", "Technology"]
     ),
 ]
