@@ -21,7 +21,7 @@ class ClassifierLlm:
             "./prompt_templates",
             f"{category.classify_type.value}_classifier.j2",
             dict(
-                category=category,
+                category=category.category,
                 labels=category.labels,
                 few_shots=category.few_shots,
             )

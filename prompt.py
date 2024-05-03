@@ -16,8 +16,13 @@ class PromptTemplate:
 
     def _load_template(self) -> None:
         environment: Environment = Environment(loader=FileSystemLoader(f"{self._template_path}/"))
+        environment.filters['surround_list'] = self.surround_list
         self._tpl = environment.get_template(f"{self._template_name}")
 
     def get_prompt(self, query: str) -> str:
         self._template_args['query'] = query
         return self._tpl.render(**self._template_args)
+
+    @staticmethod
+    def surround_list(value: str):
+        return '[' + ', '.join('"' + item + '"' for item in value) + ']'
