@@ -1,8 +1,7 @@
 import logging
 
-from category import Industry
+from category import Industry, ClassifyType
 from config import settings
-from constants import SINGLE
 from few_shots import industry_single
 from llm import ClassifierLlm
 
@@ -27,7 +26,7 @@ def main():
     industry = Industry(
         category=category,
         labels=labels,
-        classify_type=SINGLE,
+        classify_type=ClassifyType.SINGLE,
         few_shots=industry_single.few_shot
     )
 

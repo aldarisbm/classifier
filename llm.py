@@ -19,7 +19,7 @@ class ClassifierLlm:
     def __init__(self, model_path: str, category: Category):
         self._prompt_template = PromptTemplate(
             "./prompt_templates",
-            f"{category.classify_type}_classifier.j2",
+            f"{category.classify_type.value}_classifier.j2",
             dict(
                 category=category,
                 labels=category.labels,
@@ -28,7 +28,7 @@ class ClassifierLlm:
         )
 
         grammar = utils.get_grammar_from_template(
-            template=f"{category.classify_type}_label.j2",
+            template=f"{category.classify_type.value}_label.j2",
             labels=category.labels
         )
 
